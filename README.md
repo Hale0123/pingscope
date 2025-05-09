@@ -1,54 +1,60 @@
-# React + TypeScript + Vite
+# PingScope
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**PingScope** is a lightweight, browser-based network performance analyzer built with React and TypeScript.
 
-Currently, two official plugins are available:
+It allows users to measure and visualize real-time network metrics such as latency, packet loss, and DNS resolution speed. Whether you're a developer debugging an API, a gamer checking ping spikes, or a remote worker facing Zoom issues — PingScope gives you a clear view into what your connection is doing.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📦 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Latency Testing:** Manually ping a server and display the time in milliseconds.
+- **Latency History Chart:** View trends over time in a line chart.
+- **Auto-Ping Mode:** Automatically ping every 5 seconds and update the chart live.
+- **Packet Loss Simulation:** Send multiple requests and show how many failed.
+- **DNS Speed Test:** Simulate DNS resolution timing by testing domain fetch speed.
+- **Export to CSV:** Download your latency history for analysis or reporting.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎯 Why Use PingScope?
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Most users rely on generic speed tests that don't reveal the full picture. PingScope gives fine-grained visibility into:
+- Unstable latency and random spikes
+- Failing requests that indicate packet loss
+- Slow DNS response times that affect web browsing
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+It's perfect for diagnosing why your network feels slow — even when speed tests look fine.
+
+---
+
+## 👥 Who Is It For?
+
+- Developers testing API response time and performance  
+- Gamers needing to visualize ping consistency  
+- Remote workers experiencing lag during calls  
+- Students or beginners learning about latency and packet flow  
+
+---
+
+## 🛠️ Built With
+
+- React (via Vite)  
+- TypeScript  
+- Chart.js (`react-chartjs-2`)  
+- Browser APIs (`fetch`, `performance.now`, `setInterval`)  
+
+---
+
+## 🚧 Future Improvements
+
+- [ ] Threshold alerting for high latency  
+- [ ] Average/min/max stats display  
+- [ ] Traceroute-style path display  
+- [ ] UI theme switch (light/dark mode)  
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
