@@ -28,6 +28,25 @@ const LatencyTester: React.FC = () => {
   const [packetLossResult, setPacketLossResult] = useState<string | null>(null);
   const [dnsTime, setDnsTime] = useState<number | null>(null);
   const [autoPing, setAutoPing] = useState<boolean>(false);
+  const avgLatency =
+    latencyHistory.length > 0
+      ? Math.round(latencyHistory.reduce((a, b) => a + b, 0) / latencyHistory.length)
+      : null;
+  
+  const minLatency = latencyHistory.length > 0 ? Math.min(...latencyHistory) : null;
+  const maxLatency = latencyHistory.length > 0 ? Math.max(...latencyHistory) : null;
+  const [status, setStatus] = useState<string>('Idle');
+
+  const getLatencyRating = (latency: number | null): string => {
+    if (latency === null) return '';
+    if (latency <= 50) return '🟢 Excellent';
+    if (latency <= 100) return '🟡 Good';
+    if (latency <= 200) return '🟠 Fair';
+    return '🔴 Poor';
+  };
+
+
+
 
 
   // Measure one-time latency
@@ -115,7 +134,12 @@ const LatencyTester: React.FC = () => {
         <button onClick={testLatency} disabled={loading}>
           {loading ? 'Testing...' : 'Test Latency'}
         </button>
-        {latency !== null && <p>Latency: {latency} ms</p>}
+        {latency !== null && (
+          <p>
+            Latency: {latency} ms — <span>{getLatencyRating(latency)}</span>
+          </p>
+        )}
+
         <div style={{ marginTop: '1rem' }}>
           <h4>Auto-Ping Mode</h4>
           <button onClick={() => setAutoPing(prev => !prev)}>
@@ -157,7 +181,11 @@ const LatencyTester: React.FC = () => {
                     label: 'Latency (ms)',
                     data: latencyHistory,
                     fill: false,
-                    borderColor: 'rgba(75,192,192,1)',
+                    borderColor: 'rgba(50, 50, 50, 0.8)',
+                    pointBackgroundColor: (ctx) => {
+                      const value = latencyHistory[ctx.dataIndex];
+                      return value > 50 ? 'red' : 'rgba(75,192,192,1)';
+                    },
                     tension: 0.3,
                   },
                 ],
@@ -171,8 +199,16 @@ const LatencyTester: React.FC = () => {
               }}
             />
           </div>
+          {avgLatency !== null && (
+            <div style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
+              <p> Average Latency: {avgLatency} ms</p>
+              <p> Minimum Latency: {minLatency} ms</p>
+              <p> Maximum Latency: {maxLatency} ms</p>
+            </div>
+          )}
+
           <div style={{ marginTop: '1rem' }}>
-            <button onClick={exportToCSV}>📤 Export Latency History (CSV)</button>
+            <button onClick={exportToCSV}> Export Latency History (CSV)</button>
           </div>
         </div>
       )}
