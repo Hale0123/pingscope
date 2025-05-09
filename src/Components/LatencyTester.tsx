@@ -51,6 +51,8 @@ const LatencyTester: React.FC = () => {
     return '🔴 Poor';
   };
 
+  
+
 
 
 
@@ -77,17 +79,16 @@ const LatencyTester: React.FC = () => {
   // Simulate packet loss
   const simulatePacketLoss = async (url: string, attempts: number = 10) => {
     let failed = 0;
-
+    
     for (let i = 0; i < attempts; i++) {
-      try {
-        await fetch(url, { mode: 'cors' });
-      } catch {
-        failed++;
-      }
+      await new Promise((res) => setTimeout(res, 100)); // simulate delay
+      const isFailed = Math.random() < 0.2; // 20% simulated packet loss
+      if (isFailed) failed++;
     }
-
+  
     setPacketLossResult(`${failed}/${attempts} requests failed (${Math.round((failed / attempts) * 100)}%)`);
   };
+
 
   // Simulate DNS resolution time
   const testDNSSpeed = async () => {
