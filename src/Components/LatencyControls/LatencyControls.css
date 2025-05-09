@@ -1,0 +1,49 @@
+.latency-controls {
+  margin-bottom: 2rem;
+}
+
+.latency-controls h3 {
+  margin-bottom: 0.5rem;
+}
+
+.latency-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.latency-button:hover {
+  opacity: 0.9;
+}
+
+.auto-ping-toggle {
+  margin-top: 1rem;
+}
+
+.btn-primary {
+  background-color: #0f1c4d;
+  color: white;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #002ccc;
+}
+
+.btn-outline {
+  background: white;
+  color: #0038ff;
+  border: 1px solid #0038ff;
+}
+
+.btn-outline:hover {
+  background: #e6ecff;
+}

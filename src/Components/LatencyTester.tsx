@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Line } from 'react-chartjs-2';
+import LatencyControls from './LatencyControls/LatencyControls';
+import PacketLossSimulator from './PacketLossSimulator/PacketLossSimulator';
+import DNSSpeedTest from './DNSSpeedTest/DNSSpeedTest';
+import LatencyChart from './LatencyChart/LatencyChart';
+import SectionCard from './SectionCard/SectionCard';
+
+
 import {
   Chart as ChartJS,
   LineElement,
@@ -126,92 +132,47 @@ const LatencyTester: React.FC = () => {
 
   return (
     <div>
-      <h2 style={{ marginBottom: '1rem' }}>PingScope - Network Analyzer</h2>
+      <h2 style={{ marginBottom: '1rem' }}>Dashboard</h2>
 
-      {/* Latency */}
-      <div style={{ marginBottom: '2rem' }}>
-        <h3>Latency Tester</h3>
-        <button onClick={testLatency} disabled={loading}>
-          {loading ? 'Testing...' : 'Test Latency'}
-        </button>
-        {latency !== null && (
-          <p>
-            Latency: {latency} ms — <span>{getLatencyRating(latency)}</span>
-          </p>
-        )}
+      <SectionCard>
+        <LatencyControls
+          latency={latency}
+          loading={loading}
+          autoPing={autoPing}
+          testLatency={testLatency}
+          toggleAutoPing={() => setAutoPing(prev => !prev)}
+          getLatencyRating={getLatencyRating}
+        />
+      </SectionCard>
 
-        <div style={{ marginTop: '1rem' }}>
-          <h4>Auto-Ping Mode</h4>
-          <button onClick={() => setAutoPing(prev => !prev)}>
-            {autoPing ? '🛑 Stop Auto-Ping' : '▶️ Start Auto-Ping'}
-          </button>
-        </div>
-      </div>
-
-      {/* Packet Loss */}
-      <div style={{ marginBottom: '2rem' }}>
-        <h3>Packet Loss Simulator</h3>
-        <button
-          onClick={() =>
-            simulatePacketLoss('https://jsonplaceholder.typicode.com/posts/1')
-          }
-        >
-          Simulate Packet Loss
-        </button>
-        {packetLossResult && <p>{packetLossResult}</p>}
-      </div>
-
-      {/* DNS Speed */}
-      <div style={{ marginBottom: '2rem' }}>
-        <h3>DNS Speed Test</h3>
-        <button onClick={testDNSSpeed}>Test DNS Speed</button>
-        {dnsTime !== null && <p>DNS Resolution Time: {dnsTime} ms</p>}
-      </div>
-
-      {/* Latency Chart */}
       {latencyHistory.length > 0 && (
-        <div>
-          <h3>Latency History</h3>
-          <div style={{ width: '100%', maxWidth: '600px', marginTop: '1rem' }}>
-            <Line
-              data={{
-                labels: latencyHistory.map((_, idx) => `Test ${idx + 1}`),
-                datasets: [
-                  {
-                    label: 'Latency (ms)',
-                    data: latencyHistory,
-                    fill: false,
-                    borderColor: 'rgba(50, 50, 50, 0.8)',
-                    pointBackgroundColor: (ctx) => {
-                      const value = latencyHistory[ctx.dataIndex];
-                      return value > 50 ? 'red' : 'rgba(75,192,192,1)';
-                    },
-                    tension: 0.3,
-                  },
-                ],
-              }}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: { display: true },
-                  title: { display: true, text: 'Latency Over Time' },
-                },
-              }}
-            />
-          </div>
-          {avgLatency !== null && (
-            <div style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
-              <p> Average Latency: {avgLatency} ms</p>
-              <p> Minimum Latency: {minLatency} ms</p>
-              <p> Maximum Latency: {maxLatency} ms</p>
-            </div>
-          )}
-
-          <div style={{ marginTop: '1rem' }}>
-            <button onClick={exportToCSV}> Export Latency History (CSV)</button>
-          </div>
-        </div>
+        <SectionCard>
+          <LatencyChart
+            latencyHistory={latencyHistory}
+            exportToCSV={exportToCSV}
+            avgLatency={avgLatency}
+            minLatency={minLatency}
+            maxLatency={maxLatency}
+          />
+        </SectionCard>
       )}
+
+
+      <SectionCard>
+        <PacketLossSimulator
+          packetLossResult={packetLossResult}
+          simulatePacketLoss={simulatePacketLoss}
+        />
+      </SectionCard>
+
+      <SectionCard>
+        <DNSSpeedTest
+          dnsTime={dnsTime}
+          testDNSSpeed={testDNSSpeed}
+        />
+      </SectionCard>
+
+      
     </div>
   );
 };

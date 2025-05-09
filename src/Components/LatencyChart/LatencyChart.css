@@ -1,0 +1,41 @@
+.latency-chart-section {
+  margin-top: 2rem;
+}
+
+.latency-chart-wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 1rem;
+}
+
+.latency-stats {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.latency-export {
+  margin-top: 1rem;
+}
+.btn-primary {
+  background-color: #0f1c4d;
+  color: white;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #002ccc;
+}
+
+.btn-outline {
+  background: white;
+  color: #0038ff;
+  border: 1px solid #0038ff;
+}
+
+.btn-outline:hover {
+  background: #e6ecff;
+}

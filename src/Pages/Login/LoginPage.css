@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
+
+body {
+  font-family: 'Libre Baskerville', serif;
+}
+
+.login-page {
+  height: 100vh;
+  background: #0f1c4d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+
+.login-container {
+  width: 420px; /* was probably ~300px */
+  padding: 3rem;
+  background: white;
+  border-radius: 0px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+
+.app-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 2rem;
+  color: #0f1c4d;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+
+.login-form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.login-form button {
+  width: 100%;
+  background-color: #0f1c4d;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.login-form button:hover {
+  background-color: #002ccc;
+}
+

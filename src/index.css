@@ -1,16 +1,5 @@
-/* src/index.css */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f7fa;
-  margin: 0;
-  padding: 0;
+html, body {
+  overscroll-behavior: none;  /* disables bounce */
 }
 
-#root {
-  padding: 2rem;
-  max-width: 800px;
-  margin: auto;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-}
+
